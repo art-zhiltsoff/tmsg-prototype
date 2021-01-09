@@ -1,2 +1,2 @@
-import SideBarExample from './SideBarExample';
-export default SideBarExample;
+import SideBar from './SideBar';
+export default SideBar;
