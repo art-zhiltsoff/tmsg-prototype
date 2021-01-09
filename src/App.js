@@ -4,6 +4,7 @@ import {Route, Switch, withRouter} from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import EntityViewer from './components/EntityViewer';
+import SideBarExample from './components/SideBarExample';
 import axios from './axios';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     return <Route path={"/"+key} exact component={EntityViewer} /> 
   });
   routes.push(<Route path="/" exact component={HomePage}/>);
+  routes.push(<Route path="/side-bar" exact component={SideBarExample}/>);
 
   return (
     <div>

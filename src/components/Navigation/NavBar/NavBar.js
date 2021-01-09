@@ -23,6 +23,7 @@ function NavBar(props) {
                         </Link>
                     </div>                    
                     {menuItems.map(item => <NavItem link={item.link}>{item.title}</NavItem>)}
+                    <NavItem link="/side-bar">Side bar</NavItem>
                 </ul>
             </nav>
         </header>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../axios';
-import Filter from './Filter';
+//import Filter from './Filter';
 import CommandPanel from './CommandPanel';
 import Table from '../UI/Table';
 import ObjectForm from './ObjectForm';
@@ -20,7 +20,7 @@ function EntityViewer(props) {
     //console.log("[EntityViewer.js] render");
     
     const [showObjectForm, setShowObjectForm] = useState(false);
-    const [filter, setFilter] = useState({});
+    //const [filter, setFilter] = useState({});
     const [metadata, setMetadata] = useState(null);
     const [data, setData] = useState({});
     const [currentItemId, setCurrentItem] = useState(null);
@@ -76,9 +76,7 @@ function EntityViewer(props) {
     } */
 
     const rowClickHandler = (event) => {
-        const itemId = event.target.id;
-        console.log(itemId)
-        setCurrentItem(itemId);    
+        setCurrentItem(event.target.id);
     }
 
     const mbCloseHandler = (action) => {

@@ -5,9 +5,12 @@ import { Input as UI5Input } from '@ui5/webcomponents-react/lib/Input';
 import { CheckBox as UI5CheckBox } from '@ui5/webcomponents-react/lib/CheckBox';
 import { DatePicker as UI5DatePicker} from '@ui5/webcomponents-react/lib/DatePicker';
 import { DateTimePicker as UI5DateTimePicker} from '@ui5/webcomponents-react/lib/DateTimePicker';
+import { Select } from '@ui5/webcomponents-react/lib/Select';
+import { Option } from '@ui5/webcomponents-react/lib/Option';
 
 function Input(props) {
     let inputElement;
+    //console.log(props);
     switch (props.type) {
         case 'input':
             inputElement = <UI5Input
@@ -48,7 +51,21 @@ function Input(props) {
                 value={props.value}
                 onInput={props.onChange}
             />;
-            break;    
+            break;
+        case 'select':
+            //console.log(props);
+            inputElement = <Select
+                onChange={props.onChange}>
+                    {props.config.options.map(op => (
+                        <Option 
+                            key={op.value} 
+                            data-id={op.value}
+                            selected={op.value === props.value}>
+                            {op.displayValue}
+                        </Option>
+                    ))}
+                </Select>;
+            break;
         default:
             inputElement = null;
     }
