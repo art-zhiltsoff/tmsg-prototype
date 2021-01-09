@@ -56,6 +56,7 @@ function Input(props) {
             //console.log(props);
             inputElement = <Select
                 onChange={props.onChange}>
+                    <Option data-id={null} selected={props.value == null}></Option>
                     {props.config.options.map(op => (
                         <Option 
                             key={op.value} 

@@ -1,16 +1,37 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import classes from './Layout.module.css';
 import NavBar from '../Navigation/NavBar';
 import SideBarExample from '../SideBarExample';
+import { ShellBar } from '@ui5/webcomponents-react/lib/ShellBar';
+import { StandardListItem } from '@ui5/webcomponents-react/lib/StandardListItem';
 
-
+import tmsLogo from '../../assets/logo.png';
 
 function Layout(props) {    
     console.log('[Layout.js] render');
 
+    const history = useHistory();
+
+    const logoClickHandler = (event) => {
+        history.push('/');
+    }
+
     return (
         <React.Fragment>
-            <NavBar items={props.entities}/>
+            <ShellBar                
+                logo={<img src={tmsLogo} alt="TMS" />}
+                primaryTitle="TMS Global"
+                menuItems={<><StandardListItem data-key="1">Menu Item 1</StandardListItem><StandardListItem data-key="2">Menu Item 2</StandardListItem><StandardListItem data-key="3">Menu Item 3</StandardListItem></>}
+                showNotifications
+                notificationCount={10}
+                showProductSwitch
+                onLogoClick={logoClickHandler}
+                profile={<div>Profile</div>}
+            >
+                
+            </ShellBar>
+            {/* <NavBar items={props.entities}/> */}
             <div className={classes.Main}>
                 <SideBarExample items={props.entities} />
                 <main className={classes.Content}>
