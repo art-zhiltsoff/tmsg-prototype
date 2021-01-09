@@ -13,7 +13,7 @@ const actions = [
     {action: 'NEW', title: 'New', icon: 'add'},
     {action: 'EDIT', title: 'Edit',  icon: 'edit'},
     {action: 'DELETE', title: 'Delete',  icon: 'delete'},
-    {action: 'FILTER', title: 'Filter',  icon: 'filter'}
+    /* {action: 'FILTER', title: 'Filter',  icon: 'filter'} */
 ];
 
 function EntityViewer(props) {
