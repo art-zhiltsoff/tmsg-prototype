@@ -76,7 +76,8 @@ function EntityViewer(props) {
     } */
 
     const rowClickHandler = (event) => {
-        setCurrentItem(event.target.id);
+        console.log('[EntityViewer.js] rowClickHandler', event);
+        setCurrentItem(event.detail.row.original.id);
     }
 
     const mbCloseHandler = (action) => {

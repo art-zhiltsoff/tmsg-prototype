@@ -1,66 +1,37 @@
 import React from 'react';
-import { Table as UI5Table} from '@ui5/webcomponents-react/lib/Table';
-import { TableColumn } from '@ui5/webcomponents-react/lib/TableColumn';
-import { Label } from '@ui5/webcomponents-react/lib/Label';
-import { TableRow } from '@ui5/webcomponents-react/lib/TableRow';
-import { TableCell } from '@ui5/webcomponents-react/lib/TableCell';
-//import { CheckBox } from  '@ui5/webcomponents-react/lib/CheckBox';
-
-function column(props) {
-    return <TableColumn>
-        <div onClick={props.onClick}>
-            <Label>{props.label}</Label>
-        </div>
-    </TableColumn>;
-}
+import { AnalyticalTable } from '@ui5/webcomponents-react/lib/AnalyticalTable';
 
 function Table(props) {
     console.log('[Table.js] render', props);
 
-    const columns = [];
-    
+    const columns = [];    
     for (let key in props.columns) {        
-        columns.push(column({
-            label: props.columns[key].label,
-            onClick: () => props.onHeaderClick(key)
-        }))        
+        columns.push({
+            Header: props.columns[key].label,
+            accessor: key,
+        })
     }
-    // adding ID header
-    columns.push(column({
-        label: "ID",
-        onClick: () => props.onHeaderClick("ID")
-    }));
+    columns.push({
+        Header: "ID",
+        accessor: "id"
+    });
     
-    const rows = [];    
+    const data = [];
+    
     for (let key in props.data) {
-        const data = props.data[key];
-        const cells = [];        
-        
-        for (let columnKey in props.columns) {            
-            const column = props.columns[columnKey];
-            let value = data[columnKey];
-            if (column.type === 'bool') {
-                value = (value ? 'Yes' : 'No');
-            }
-            cells.push(
-                <TableCell>
-                    {value}
-                </TableCell>
-            );
-        }
-        // adding ID value
-        cells.push(
-            <TableCell>
-                <Label>{key}</Label>
-            </TableCell>
-        );
-        rows.push(<TableRow id={key}>{cells}</TableRow>);
+        data.push({...props.data[key], id: key});
     }
     
-    return <UI5Table 
-        columns={<>{columns}</>}
-        onRowClick={props.onRowClick}>{rows}
-    </UI5Table>;
+    return <AnalyticalTable 
+        selectionMode="SingleSelect"    
+        filterable
+        columns={columns}
+        data={data}
+        onRowSelected={props.onRowClick}
+        withRowHighlight
+        minRows={1}    
+    />;
+    
 }
 
 export default Table;
