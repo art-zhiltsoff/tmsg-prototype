@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { useHistory } from 'react-router-dom';
 import classes from './Layout.module.css';
 import NavBar from '../Navigation/NavBar';
 import SideBarExample from '../SideBarExample';
 import { ShellBar } from '@ui5/webcomponents-react/lib/ShellBar';
 import { StandardListItem } from '@ui5/webcomponents-react/lib/StandardListItem';
+import { ActionSheet } from '@ui5/webcomponents-react/lib/ActionSheet';
+import Button from '../UI/Button';
+import { Avatar } from '@ui5/webcomponents-react/lib/Avatar';
+import '@ui5/webcomponents-icons/dist/employee';
 
 import tmsLogo from '../../assets/logo.png';
 
@@ -17,6 +21,11 @@ function Layout(props) {
         history.push('/');
     }
 
+    const actionSheetRef = useRef();
+    const profileClickHandler = (e) => {
+        actionSheetRef.current.open(e.target);
+    }
+
     return (
         <React.Fragment>
             <ShellBar                
@@ -27,8 +36,16 @@ function Layout(props) {
                 notificationCount={10}
                 showProductSwitch
                 onLogoClick={logoClickHandler}
-                profile={<div>Profile</div>}
+                profile={<div onClick={profileClickHandler}>
+                    <Avatar size="XS" icon="employee"/>
+                </div>}
             >
+                <ActionSheet
+                    ref={actionSheetRef} 
+                    placementType="Bottom">
+                    <Button design="Transparent">Settings</Button>
+                    <Button design="Transparent">Log off</Button>
+                </ActionSheet>
                 
             </ShellBar>
             {/* <NavBar items={props.entities}/> */}

@@ -8,7 +8,7 @@ import '@ui5/webcomponents-icons/dist/filter';
 
 function Button(props) {
     // UI5 primary => design : "Emphasized"
-    const design = props.primary ? "Emphasized" : "Default";
+    const design = props.primary ? "Emphasized" : props.design;
 
     return (
         <div>
