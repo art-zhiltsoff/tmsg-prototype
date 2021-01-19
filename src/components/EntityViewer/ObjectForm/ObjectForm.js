@@ -8,6 +8,7 @@ import { Form } from '@ui5/webcomponents-react/lib/Form';
 import { FormGroup } from '@ui5/webcomponents-react/lib/FormGroup';
 import axios from '../../../axios';
 import classes from './ObjectForm.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 function inputType(columnType) {
@@ -87,6 +88,8 @@ function ObjectForm(props) {
     console.log('[ObjectForm.js] render', props);
     const [objectForm, setObjectForm] = useState({});
 
+    const {t, i18n} = useTranslation();
+
     useEffect(() => {
         async function init() {
             const formControls = await columnsToObjectForm(props.metadata.columns, props.currentItem);
@@ -136,7 +139,7 @@ function ObjectForm(props) {
                 type={c.type}
                 config={c.config}
                 value={c.value}
-                label={c.label}
+                label={t(c.label)}
                 onChange={(event) => inputChangeHandler(event, c.id)}
             />
         });
@@ -165,7 +168,7 @@ function ObjectForm(props) {
             </Form>
             <Toolbar className={classes.Toolbar} design="Footer" itemsAlign="right">
                 <Button primary onClick={submitObject}>OK</Button>
-                <Button onClick={() => props.dispatch('CANCEL')}>Cancel</Button>
+                <Button onClick={() => props.dispatch('CANCEL')}>{t("Cancel")}</Button>
             </Toolbar>
         </Modal>
     );

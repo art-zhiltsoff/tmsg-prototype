@@ -8,6 +8,8 @@ import Spinner from '../UI/Spinner';
 import Loader from '../UI/Loader';
 import { MessageBox } from '@ui5/webcomponents-react/lib/MessageBox';
 
+import { useTranslation } from 'react-i18next';
+
 // TODO: get actions from metadata api
 const actions = [
     {action: 'NEW', title: 'New', icon: 'add'},
@@ -26,6 +28,8 @@ function EntityViewer(props) {
     const [currentItemId, setCurrentItem] = useState(null);
     const [mbOpen, setMbOpen] = useState(false);
     const [dataLoading, setDataLoading] = useState(false);
+
+    const {t, i18n} = useTranslation();
 
     const metadataUrl = props.location.pathname+"/metadata";
     const dataUrl = props.location.pathname+"/data";
@@ -99,7 +103,7 @@ function EntityViewer(props) {
     if (metadata) {
         content = (
             <div>
-                <h1>{metadata.title}</h1>
+                <h1>{t(metadata.title)}</h1>
                 <CommandPanel 
                     actions={actions}
                     dispatch={(action) => actionDispatch(action)}/>
@@ -119,7 +123,7 @@ function EntityViewer(props) {
                 <MessageBox 
                     open={mbOpen} 
                     onClose={mbCloseHandler}
-                    >Delete object?
+                    >{t("Delete object?")}
                 </MessageBox>
                 {dataLoading ? <Spinner /> : null}
             </div>

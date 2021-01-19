@@ -8,11 +8,15 @@ import { PieChart } from '@ui5/webcomponents-react-charts/lib/PieChart';
 import { RadarChart } from '@ui5/webcomponents-react-charts/lib/RadarChart';
 import { ScatterChart } from '@ui5/webcomponents-react-charts/lib/ScatterChart';
 
+import { useTranslation } from 'react-i18next';
+
 function ChartsDemo(props) {
+    const {t, i18n} = useTranslation();
+    
     return (
         <React.Fragment>
             <div>
-                <h1>Charts</h1>
+                <h1>{t("charts")}</h1>
             </div>
             <div>
                 <div>
