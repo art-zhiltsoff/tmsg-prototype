@@ -1,13 +1,17 @@
 import React from 'react';
 import { AnalyticalTable } from '@ui5/webcomponents-react/lib/AnalyticalTable';
 
+import {useTranslation} from 'react-i18next';
+
 function Table(props) {
     console.log('[Table.js] render', props);
+
+    const {t, i18n} = useTranslation();
 
     const columns = [];    
     for (let key in props.columns) {        
         columns.push({
-            Header: props.columns[key].label,
+            Header: t(props.columns[key].label),
             accessor: key,
         })
     }

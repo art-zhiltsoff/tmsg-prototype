@@ -9,16 +9,19 @@ import '@ui5/webcomponents-icons/dist/home';
 import '@ui5/webcomponents-icons/dist/course-book';
 import '@ui5/webcomponents-icons/dist/bubble-chart';
 
+import { useTranslation } from 'react-i18next';
+
 function SideBar(props) {
     console.log('[SideBar.js] render ', props);
     
     const history = useHistory();
+    const { t, i18n } = useTranslation();
 
     const subItems = [];
     for (let key in props.items) {
         subItems.push(
             <SideNavigationSubItem  
-                text={props.items[key]} 
+                text={t(props.items[key])}
                 data-link={"/"+key}
             />
         );
@@ -32,18 +35,18 @@ function SideBar(props) {
         <SideNavigation onSelectionChange={itemClickHandler}>
             <SideNavigationItem
                 icon="home"
-                text="Home"
+                text={t('home')}
                 data-link="/"
             />
             <SideNavigationItem
                 icon="course-book"
-                text="Dictionaries"
+                text={t('dictionaries')}
             >
                 {subItems}
             </SideNavigationItem>
             <SideNavigationItem 
                 icon='bubble-chart'
-                text='Charts'
+                text={t('charts')}
                 data-link="/charts"/>
         </SideNavigation>
     ); 
